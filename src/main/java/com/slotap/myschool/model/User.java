@@ -1,6 +1,9 @@
 package com.slotap.myschool.model;
 
+import org.hibernate.validator.constraints.pl.PESEL;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -11,16 +14,18 @@ public class User {
     private String firstName;
     private String lastName;
     private String pesel;
+    private String address;
+    private String email;
     private UserRole role;
 
-    public User() {
-    }
+    public User(){}
 
-    User(final long id, final String firstName, final String lastName, final String pesel, final UserRole role) {
-        this.id = id;
+    public User(final String firstName, final String lastName, final String pesel, final String email,final String address, final UserRole role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.pesel = pesel;
+        this.email = email;
+        this.address = address;
         this.role = role;
     }
 
@@ -56,6 +61,7 @@ public class User {
         this.lastName = lastName;
     }
 
+   // @PESEL
     @NotNull
     @Column(name = "PESEL")
     public String getPesel() {
@@ -74,5 +80,24 @@ public class User {
 
     private void setRole(final UserRole role) {
         this.role = role;
+    }
+
+    @Column(name = "ADDRESS")
+    public String getAddress() {
+        return address;
+    }
+
+    private void setAddress(final String address) {
+        this.address = address;
+    }
+
+    @Email
+    @Column(name = "EMAIL")
+    public String getEmail() {
+        return email;
+    }
+
+    private void setEmail(final String email) {
+        this.email = email;
     }
 }
